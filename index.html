@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Uma Surpresa Especial</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e1b4b,#4c1d95);
+    color:white;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+}
+
+.stars{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background-image:
+    radial-gradient(white 1px, transparent 1px);
+    background-size:50px 50px;
+    opacity:.25;
+    animation:moveStars 25s linear infinite;
+}
+
+@keyframes moveStars{
+    from{transform:translateY(0);}
+    to{transform:translateY(-100px);}
+}
+
+.card{
+    position:relative;
+    z-index:2;
+    width:90%;
+    max-width:550px;
+    background:rgba(255,255,255,0.1);
+    backdrop-filter:blur(15px);
+    border-radius:24px;
+    padding:35px;
+    text-align:center;
+    box-shadow:0 15px 40px rgba(0,0,0,.35);
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+p{
+    line-height:1.7;
+    margin-bottom:15px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    margin-top:15px;
+    font-size:1rem;
+}
+
+button{
+    margin-top:20px;
+    padding:14px 28px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:1rem;
+    font-weight:600;
+    background:white;
+    color:#4c1d95;
+}
+
+button:hover{
+    transform:scale(1.03);
+}
+
+.hidden{
+    display:none;
+}
+
+.heart{
+    font-size:4rem;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+    100%{transform:scale(1);}
+}
+
+.spotify{
+    display:inline-block;
+    margin-top:20px;
+    text-decoration:none;
+    background:#1DB954;
+    color:white;
+    padding:15px 25px;
+    border-radius:12px;
+    font-weight:600;
+}
+
+.footer{
+    margin-top:25px;
+    font-size:.8rem;
+    opacity:.4;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="stars"></div>
+
+<div class="card">
+
+    <div id="tela1">
+
+        <h1>✨ Existe uma pequena surpresa escondida aqui</h1>
+
+        <p>
+            Nem todo mundo conseguirá encontrá-la.
+        </p>
+
+        <button onclick="iniciar()">
+            Começar
+        </button>
+
+    </div>
+
+    <div id="tela2" class="hidden">
+
+        <h1>🌙 Antes de continuar...</h1>
+
+        <p>
+            Qual é o seu nome?
+        </p>
+
+        <input type="text" id="nome" placeholder="Digite seu nome">
+
+        <button onclick="verificar()">
+            Continuar
+        </button>
+
+    </div>
+
+    <div id="resultado" class="hidden"></div>
+
+</div>
+
+<script>
+
+function iniciar(){
+    document.getElementById("tela1").classList.add("hidden");
+    document.getElementById("tela2").classList.remove("hidden");
+}
+
+function verificar(){
+
+    let nome = document
+        .getElementById("nome")
+        .value
+        .trim()
+        .toLowerCase();
+
+    document.getElementById("tela2").classList.add("hidden");
+
+    let resultado = document.getElementById("resultado");
+
+    resultado.classList.remove("hidden");
+
+    if(nome === "carine"){
+
+        resultado.innerHTML = `
+            <div class="heart">❤️</div>
+
+            <h1>Você encontrou exatamente o que procurava</h1>
+
+            <p>
+                Há encontros que parecem coincidência.
+            </p>
+
+            <p>
+                Há músicas que parecem recados.
+            </p>
+
+            <p>
+                Esta música estava esperando pela pessoa certa.
+            </p>
+
+            <p>
+                E essa pessoa é você, Carine.
+            </p>
+
+            <a class="spotify"
+            target="_blank"
+            href="https://open.spotify.com/track/6bAnkRCGOX7g5rT8WN5eci?si=DSJ3pHylQh61mxPhA6JEog&context=spotify%3Aplaylist%3A37i9dQZF1EIWcUulZOXV01">
+                🎵 Abrir minha música
+            </a>
+
+            <div class="footer">
+                ✨ Algumas coincidências são apenas o universo sendo criativo.
+            </div>
+        `;
+
+    } else {
+
+        resultado.innerHTML = `
+            <h1>😅 Quase...</h1>
+
+            <p>
+                Esta surpresa foi reservada para outra pessoa.
+            </p>
+
+            <button onclick="location.reload()">
+                Voltar
+            </button>
+        `;
+    }
+}
+
+</script>
+
+</body>
+</html>
